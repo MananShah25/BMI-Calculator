@@ -3,8 +3,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'gender_card.dart';
 import 'reuse_card.dart';
 
-const EndContainerHeight = 80.0;
-const ActiveColor = Color(0xFF1B1633);
+const endContainerHeight = 80.0;
+const activeColor = Color(0xFF111328);
+const inactiveColor = Color(0xFF1B1633);
+const endContainerColor = Colors.pinkAccent;
+
+enum Gender {
+  male,
+  female,
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -12,6 +19,27 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleColor = inactiveColor;
+  Color femaleColor = inactiveColor;
+
+  void update(Gender g) {
+    if (g == Gender.male) {
+      if (maleColor == activeColor) {
+        maleColor = inactiveColor;
+      } else {
+        maleColor = activeColor;
+        femaleColor = inactiveColor;
+      }
+    } else {
+      if (femaleColor == activeColor) {
+        femaleColor = inactiveColor;
+      } else {
+        femaleColor = activeColor;
+        maleColor = inactiveColor;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,20 +54,38 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReuseCard(
-                    col: ActiveColor,
-                    cardChild: GenderCard(
-                      genderSymbol: FontAwesomeIcons.mars,
-                      genderText: 'MALE',
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // maleColor = activeColor;
+                        // femaleColor = inactiveColor;
+                        update(Gender.male);
+                      });
+                    },
+                    child: ReuseCard(
+                      col: maleColor,
+                      cardChild: GenderCard(
+                        genderSymbol: FontAwesomeIcons.mars,
+                        genderText: 'MALE',
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: ReuseCard(
-                    col: ActiveColor,
-                    cardChild: GenderCard(
-                      genderSymbol: FontAwesomeIcons.venus,
-                      genderText: 'FEMALE',
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // femaleColor = activeColor;
+                        // maleColor = inactiveColor;
+                        update(Gender.female);
+                      });
+                    },
+                    child: ReuseCard(
+                      col: femaleColor,
+                      cardChild: GenderCard(
+                        genderSymbol: FontAwesomeIcons.venus,
+                        genderText: 'FEMALE',
+                      ),
                     ),
                   ),
                 ),
@@ -48,7 +94,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReuseCard(
-              col: ActiveColor,
+              col: inactiveColor,
             ),
           ),
           Expanded(
@@ -56,21 +102,21 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReuseCard(
-                    col: ActiveColor,
+                    col: inactiveColor,
                   ),
                 ),
                 Expanded(
                   child: ReuseCard(
-                    col: ActiveColor,
+                    col: inactiveColor,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: Colors.pinkAccent,
+            color: endContainerColor,
             margin: EdgeInsets.only(top: 10.0),
-            height: EndContainerHeight,
+            height: endContainerHeight,
             width: double.maxFinite,
           ),
         ],
