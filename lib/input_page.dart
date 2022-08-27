@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/inactive_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'gender_card.dart';
@@ -16,6 +17,16 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender gen;
+  int height = 122;
+  int weight = 70;
+  int age = 35;
+  // double val = 1.0;
+
+  // void slide(double d) {
+  //   setState(() {
+  //     height = d.toInt();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -74,23 +85,32 @@ class _InputPageState extends State<InputPage> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
                     children: [
                       Text(
-                        '100',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 50.0,
-                        ),
+                        height.toString(),
+                        style: kNumberStyle,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 5.0),
-                        child: Text(
-                          'cm',
-                          style: TextStyle(fontSize: 25.0),
-                        ),
+                      Text(
+                        'cm',
+                        style: kLabelStyle,
                       ),
                     ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    onChanged: (double value) {
+                      setState(() {
+                        height = value.round();
+                        // print(value);
+                      });
+                    },
+                    min: 122.0,
+                    max: 213.0,
+                    // label: 'height',
+                    // mouseCursor: MouseCursor.uncontrolled,
+                    // thumbColor: Colors.red,
                   ),
                 ],
               ),
@@ -102,11 +122,19 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReuseCard(
                     col: kInactiveColor,
+                    cardChild: InactiveCard(
+                      labelText: 'WEIGHT',
+                      variableValue: weight,
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReuseCard(
                     col: kInactiveColor,
+                    cardChild: InactiveCard(
+                      labelText: 'AGE',
+                      variableValue: age,
+                    ),
                   ),
                 ),
               ],
@@ -117,6 +145,15 @@ class _InputPageState extends State<InputPage> {
             margin: EdgeInsets.only(top: 10.0),
             height: kEndContainerHeight,
             width: double.maxFinite,
+            child: Center(
+              child: Text(
+                'CALCULATE',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),

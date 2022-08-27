@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/gender_card.dart';
+// import 'package:bmi_calculator/gender_card.dart';
 import 'package:flutter/material.dart';
 
 class ReuseCard extends StatelessWidget {
