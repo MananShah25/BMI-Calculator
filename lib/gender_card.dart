@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'const_variables.dart';
 
 class GenderCard extends StatelessWidget {
   // const GenderCard({
@@ -24,11 +25,8 @@ class GenderCard extends StatelessWidget {
         ),
         Text(
           genderText,
-          style: TextStyle(
-            color: Color(0xFF8D8E98),
-            fontSize: 20.0,
-          ),
-        )
+          style: kLabelStyle,
+        ),
       ],
     );
   }
