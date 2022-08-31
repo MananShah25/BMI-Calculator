@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'gender_card.dart';
 import 'reuse_card.dart';
 import 'const_variables.dart';
+import 'dart:math';
+import 'result_page.dart';
 
 enum Gender {
   male,
@@ -22,11 +24,9 @@ class _InputPageState extends State<InputPage> {
   int age = 35;
   // double val = 1.0;
 
-  // void slide(double d) {
-  //   setState(() {
-  //     height = d.toInt();
-  //   });
-  // }
+  double bmi(int h, int w) {
+    return (w / pow(h / 100, 2));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +123,16 @@ class _InputPageState extends State<InputPage> {
                   child: ReuseCard(
                     col: kInactiveColor,
                     cardChild: InactiveCard(
+                      onTapLeft: () {
+                        setState(() {
+                          weight--;
+                        });
+                      },
+                      onTapRight: () {
+                        setState(() {
+                          weight++;
+                        });
+                      },
                       labelText: 'WEIGHT',
                       variableValue: weight,
                     ),
@@ -132,6 +142,16 @@ class _InputPageState extends State<InputPage> {
                   child: ReuseCard(
                     col: kInactiveColor,
                     cardChild: InactiveCard(
+                      onTapLeft: () {
+                        setState(() {
+                          age--;
+                        });
+                      },
+                      onTapRight: () {
+                        setState(() {
+                          age++;
+                        });
+                      },
                       labelText: 'AGE',
                       variableValue: age,
                     ),
@@ -145,12 +165,25 @@ class _InputPageState extends State<InputPage> {
             margin: EdgeInsets.only(top: 10.0),
             height: kEndContainerHeight,
             width: double.maxFinite,
-            child: Center(
-              child: Text(
-                'CALCULATE',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
+            child: TextButton(
+              onPressed: () {
+                print(height);
+                print(weight);
+                print(bmi(height, weight));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ResultPage(
+                    bmiValue: bmi(height, weight),
+                  );
+                }));
+              },
+              child: Center(
+                child: Text(
+                  'CALCULATE',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

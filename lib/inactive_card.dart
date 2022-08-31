@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'const_variables.dart';
+import 'round_action_button.dart';
 
-class InactiveCard extends StatefulWidget {
+class InactiveCard extends StatelessWidget {
   // const InactiveCard({Key? key}) : super(key: key);
-  InactiveCard({@required this.labelText, @required this.variableValue});
+  InactiveCard(
+      {@required this.labelText,
+      @required this.variableValue,
+      @required this.onTapLeft,
+      @required this.onTapRight});
 
   final String labelText;
   int variableValue;
+  final Function onTapLeft;
+  final Function onTapRight;
 
-  @override
-  State<InactiveCard> createState() => _InactiveCardState();
-}
-
-class _InactiveCardState extends State<InactiveCard> {
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          widget.labelText,
+          labelText,
           style: kLabelStyle,
         ),
         Text(
-          widget.variableValue.toString(),
+          variableValue.toString(),
           style: kNumberStyle,
         ),
         Row(
@@ -32,51 +35,35 @@ class _InactiveCardState extends State<InactiveCard> {
             // Icon(
             //   Icons.add_circle,
             // ),
-            FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  widget.variableValue -= 1;
-                });
-              },
-              child: Icon(
-                Icons.remove,
-                color: Colors.white,
-              ),
-              backgroundColor: Colors.blue,
-              // hoverColor: Colors.pinkAccent,
+            RoundActionButton(
+              icon: FontAwesomeIcons.minus,
+              onClick: onTapLeft,
             ),
+            // onPressed: () {},
+            // child: Icon(
+            //   Icons.remove,
+            //   color: Colors.white,
+            // ),
+            // hoverColor: Colors.pinkAccent,
             SizedBox(
               width: 20.0,
             ),
-            FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  widget.variableValue += 1;
-                });
-              },
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-              backgroundColor: Colors.blue,
-              // hoverColor: Colors.pinkAccent,
+            RoundActionButton(
+              icon: FontAwesomeIcons.plus,
+              onClick: onTapRight,
             ),
+            // FloatingActionButton(
+            //   onPressed: () {},
+            //   child: Icon(
+            //     Icons.add,
+            //     color: Colors.white,
+            //   ),
+            //   backgroundColor: Colors.blue,
+            //   // hoverColor: Colors.pinkAccent,
+            // ),
           ],
         ),
       ],
-    );
-  }
-}
-
-class RoundActionButton extends StatelessWidget {
-  // const RoundActionButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: () {},
-      shape: CircleBorder(),
-      fillColor: Colors.blue,
     );
   }
 }
