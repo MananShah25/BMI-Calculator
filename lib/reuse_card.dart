@@ -10,17 +10,19 @@ class ReuseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onClick,
-      child: Container(
-        margin: EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-          color: col,
-          borderRadius: BorderRadius.circular(10.0),
+    return Expanded(
+      child: GestureDetector(
+        onTap: onClick,
+        child: Container(
+          margin: EdgeInsets.all(15.0),
+          decoration: BoxDecoration(
+            color: col,
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          // height: 200,
+          // width: 170,
+          child: cardChild,
         ),
-        // height: 200,
-        // width: 170,
-        child: cardChild,
       ),
     );
   }

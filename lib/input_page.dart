@@ -42,119 +42,109 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: [
-                Expanded(
-                  child: ReuseCard(
-                    col: gen == Gender.male ? kActiveColor : kInactiveColor,
-                    cardChild: GenderCard(
-                      genderSymbol: FontAwesomeIcons.mars,
-                      genderText: 'MALE',
-                    ),
-                    onClick: () {
-                      setState(() {
-                        gen = Gender.male;
-                      });
-                    },
+                ReuseCard(
+                  col: gen == Gender.male ? kActiveColor : kInactiveColor,
+                  cardChild: GenderCard(
+                    genderSymbol: FontAwesomeIcons.mars,
+                    genderText: 'MALE',
                   ),
+                  onClick: () {
+                    setState(() {
+                      gen = Gender.male;
+                    });
+                  },
                 ),
-                Expanded(
-                  child: ReuseCard(
-                    col: gen == Gender.female ? kActiveColor : kInactiveColor,
-                    cardChild: GenderCard(
-                      genderSymbol: FontAwesomeIcons.venus,
-                      genderText: 'FEMALE',
-                    ),
-                    onClick: () {
-                      setState(() {
-                        gen = Gender.female;
-                      });
-                    },
+                ReuseCard(
+                  col: gen == Gender.female ? kActiveColor : kInactiveColor,
+                  cardChild: GenderCard(
+                    genderSymbol: FontAwesomeIcons.venus,
+                    genderText: 'FEMALE',
                   ),
+                  onClick: () {
+                    setState(() {
+                      gen = Gender.female;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          ReuseCard(
+            col: kInactiveColor,
+            cardChild: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'HEIGHT',
+                  style: kLabelStyle,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      height.toString(),
+                      style: kNumberStyle,
+                    ),
+                    Text(
+                      'cm',
+                      style: kLabelStyle,
+                    ),
+                  ],
+                ),
+                Slider(
+                  value: height.toDouble(),
+                  onChanged: (double value) {
+                    setState(() {
+                      height = value.round();
+                      // print(value);
+                    });
+                  },
+                  min: 122.0,
+                  max: 213.0,
+                  // label: 'height',
+                  // mouseCursor: MouseCursor.uncontrolled,
+                  // thumbColor: Colors.red,
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ReuseCard(
-              col: kInactiveColor,
-              cardChild: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'HEIGHT',
-                    style: kLabelStyle,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        height.toString(),
-                        style: kNumberStyle,
-                      ),
-                      Text(
-                        'cm',
-                        style: kLabelStyle,
-                      ),
-                    ],
-                  ),
-                  Slider(
-                    value: height.toDouble(),
-                    onChanged: (double value) {
-                      setState(() {
-                        height = value.round();
-                        // print(value);
-                      });
-                    },
-                    min: 122.0,
-                    max: 213.0,
-                    // label: 'height',
-                    // mouseCursor: MouseCursor.uncontrolled,
-                    // thumbColor: Colors.red,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
             child: Row(
               children: [
-                Expanded(
-                  child: ReuseCard(
-                    col: kInactiveColor,
-                    cardChild: InactiveCard(
-                      onTapLeft: () {
-                        setState(() {
-                          weight--;
-                        });
-                      },
-                      onTapRight: () {
-                        setState(() {
-                          weight++;
-                        });
-                      },
-                      labelText: 'WEIGHT',
-                      variableValue: weight,
-                    ),
+                ReuseCard(
+                  col: kInactiveColor,
+                  cardChild: InactiveCard(
+                    onTapLeft: () {
+                      setState(() {
+                        weight--;
+                      });
+                    },
+                    onTapRight: () {
+                      setState(() {
+                        weight++;
+                      });
+                    },
+                    labelText: 'WEIGHT',
+                    variableValue: weight,
                   ),
                 ),
-                Expanded(
-                  child: ReuseCard(
-                    col: kInactiveColor,
-                    cardChild: InactiveCard(
-                      onTapLeft: () {
-                        setState(() {
-                          age--;
-                        });
-                      },
-                      onTapRight: () {
-                        setState(() {
-                          age++;
-                        });
-                      },
-                      labelText: 'AGE',
-                      variableValue: age,
-                    ),
+                ReuseCard(
+                  col: kInactiveColor,
+                  cardChild: InactiveCard(
+                    onTapLeft: () {
+                      setState(() {
+                        age--;
+                      });
+                    },
+                    onTapRight: () {
+                      setState(() {
+                        age++;
+                      });
+                    },
+                    labelText: 'AGE',
+                    variableValue: age,
                   ),
                 ),
               ],
@@ -167,9 +157,9 @@ class _InputPageState extends State<InputPage> {
             width: double.maxFinite,
             child: TextButton(
               onPressed: () {
-                print(height);
-                print(weight);
-                print(bmi(height, weight));
+                // print(height);
+                // print(weight);
+                // print(bmi(height, weight));
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ResultPage(
                     bmiValue: bmi(height, weight),
